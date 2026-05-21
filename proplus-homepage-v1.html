@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProPlus Plumbing — Toronto's Custom Home Plumbing Specialists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #EC1C24;
+    --blue: #243D97;
+    --navy: #0F1B45;
+    --ink: #0A0A0A;
+    --paper: #FAFAF7;
+    --cream: #F4F2EC;
+    --grey-1: #6B6B68;
+    --grey-2: #2E2E2C;
+    --line: #E5E3DD;
+    --display: 'Fraunces', serif;
+    --body: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: none;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ CUSTOM CURSOR ============ */
+  .cursor-dot, .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+  }
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    transition: width 0.2s, height 0.2s, background 0.2s;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    transition: width 0.25s cubic-bezier(.2,.8,.2,1),
+                height 0.25s cubic-bezier(.2,.8,.2,1),
+                background 0.25s, border-color 0.25s, opacity 0.2s;
+    mix-blend-mode: difference;
+    border-color: white;
+  }
+  .cursor-ring.hover {
+    width: 80px; height: 80px;
+    border-color: var(--red);
+    background: rgba(236, 28, 36, 0.1);
+  }
+  .cursor-ring.cta {
+    width: 100px; height: 100px;
+    background: var(--red);
+    border-color: var(--red);
+  }
+  .cursor-dot.cta { opacity: 0; }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+    color: white;
+  }
+  .logo {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-bars {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .logo-bars span {
+    display: block;
+    width: 4px;
+    height: 22px;
+  }
+  .logo-bars span:first-child { background: var(--red); }
+  .logo-bars span:last-child { background: var(--blue); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 1px;
+    background: white;
+    transition: width 0.3s;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 100px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .nav-cta:hover { background: white; color: var(--ink); }
+
+  /* ============ SIDE BARS (signature element) ============ */
+  .side-bars {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+  .side-bars .bar-red {
+    flex: 1;
+    background: var(--red);
+    transform-origin: top;
+  }
+  .side-bars .bar-blue {
+    flex: 1;
+    background: var(--blue);
+    transform-origin: top;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    height: 100vh;
+    min-height: 720px;
+    background: var(--ink);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(36, 61, 151, 0.25), transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(236, 28, 36, 0.12), transparent 50%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.4);
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(56px, 9vw, 144px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    max-width: 1200px;
+  }
+  .hero-title .line {
+    display: block;
+    overflow: hidden;
+  }
+  .hero-title .line span {
+    display: inline-block;
+    transform: translateY(110%);
+    animation: slideUp 1.2s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .hero-title .line:nth-child(1) span { animation-delay: 0.5s; }
+  .hero-title .line:nth-child(2) span { animation-delay: 0.65s; }
+  .hero-title .line:nth-child(3) span { animation-delay: 0.8s; }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--red);
+    font-weight: 400;
+  }
+  .hero-title .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px white;
+    font-style: italic;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+    right: 72px;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+  }
+  .hero-tagline {
+    max-width: 380px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.7);
+  }
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+  }
+  .hero-stat .num {
+    font-family: var(--display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .hero-stat .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 8px;
+  }
+  .scroll-indicator {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    writing-mode: vertical-rl;
+    opacity: 0;
+    animation: fadeUp 1s 1.8s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    to { transform: translateY(0); }
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee {
+    background: var(--ink);
+    color: white;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 60px;
+    animation: marqueeMove 30s linear infinite;
+    font-family: var(--display);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+  }
+  .marquee-track span { display: flex; align-items: center; gap: 60px; }
+  .marquee-track .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--red);
+    display: inline-block;
+  }
+  @keyframes marqueeMove {
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============ INTRO SECTION ============ */
+  .intro {
+    padding: 160px 48px;
+    position: relative;
+  }
+  .intro-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: flex-start;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+  }
+  .intro-text {
+    font-family: var(--display);
+    font-size: clamp(28px, 3.2vw, 48px);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .intro-text em {
+    font-style: italic;
+    color: var(--blue);
+  }
+  .intro-text .reveal-line {
+    display: block;
+    overflow: hidden;
+  }
+  .intro-text .reveal-line span {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: transform 1s cubic-bezier(.2,.8,.2,1);
+  }
+  .intro.in-view .intro-text .reveal-line span { transform: translateY(0); }
+  .intro.in-view .intro-text .reveal-line:nth-child(2) span { transition-delay: 0.1s; }
+  .intro.in-view .intro-text .reveal-line:nth-child(3) span { transition-delay: 0.2s; }
+  .intro.in-view .intro-text .reveal-line:nth-child(4) span { transition-delay: 0.3s; }
+  .intro.in-view .intro-text .reveal-line:nth-child(5) span { transition-delay: 0.4s; }
+
+  /* ============ SERVICES ============ */
+  .services {
+    background: var(--cream);
+    padding: 120px 48px;
+    position: relative;
+  }
+  .services-header {
+    max-width: 1400px;
+    margin: 0 auto 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+  .services-title {
+    font-family: var(--display);
+    font-size: clamp(48px, 6vw, 96px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .services-title em {
+    font-style: italic;
+    color: var(--red);
+    font-weight: 400;
+  }
+  .services-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--paper);
+    padding: 40px;
+    aspect-ratio: 3/4;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+    cursor: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--line);
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+  }
+  .service-card-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--grey-1);
+  }
+  .service-card-visual {
+    flex: 1;
+    margin: 32px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .service-card-visual svg {
+    width: 80%;
+    height: 80%;
+    transition: transform 0.6s cubic-bezier(.2,.8,.2,1);
+  }
+  .service-card:hover .service-card-visual svg {
+    transform: scale(1.1) rotate(-2deg);
+  }
+  .service-card-title {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .service-card-title em {
+    font-style: italic;
+    color: var(--red);
+  }
+  .service-card-desc {
+    font-size: 14px;
+    color: var(--grey-1);
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .service-card-arrow {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+  }
+  .service-card:hover .service-card-arrow {
+    background: var(--red);
+    border-color: var(--red);
+    color: white;
+    transform: rotate(-45deg);
+  }
+
+  /* ============ HORIZONTAL SCROLL: PROCESS ============ */
+  .process {
+    background: var(--ink);
+    color: white;
+    overflow: hidden;
+  }
+  .process-sticky {
+    height: 400vh;
+    position: relative;
+  }
+  .process-pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .process-track {
+    display: flex;
+    gap: 48px;
+    padding: 0 48px;
+    will-change: transform;
+  }
+  .process-intro {
+    flex-shrink: 0;
+    width: 50vw;
+    padding-right: 80px;
+  }
+  .process-intro h2 {
+    font-family: var(--display);
+    font-size: clamp(48px, 6vw, 96px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin: 24px 0;
+  }
+  .process-intro h2 em {
+    font-style: italic;
+    color: var(--red);
+  }
+  .process-intro p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    max-width: 420px;
+    margin-top: 32px;
+    line-height: 1.6;
+  }
+  .process-step {
+    flex-shrink: 0;
+    width: 480px;
+    height: 600px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+  .process-step-num {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 200px;
+    font-weight: 200;
+    line-height: 0.85;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.15);
+    letter-spacing: -0.04em;
+  }
+  .process-step-body h3 {
+    font-family: var(--display);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .process-step-body p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+  }
+  .process-step-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  /* ============ AUDIENCES ============ */
+  .audiences {
+    padding: 160px 48px;
+    background: var(--paper);
+  }
+  .audiences-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .audiences-header {
+    margin-bottom: 80px;
+    max-width: 800px;
+  }
+  .audiences-header h2 {
+    font-family: var(--display);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-top: 24px;
+  }
+  .audiences-header h2 em {
+    font-style: italic;
+    color: var(--blue);
+  }
+  .audiences-list {
+    border-top: 1px solid var(--line);
+  }
+  .audience-row {
+    border-bottom: 1px solid var(--line);
+    padding: 32px 0;
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr 60px;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    transition: padding-left 0.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .audience-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+    z-index: 0;
+  }
+  .audience-row:hover {
+    padding-left: 32px;
+    color: white;
+  }
+  .audience-row:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  .audience-row > * { position: relative; z-index: 1; }
+  .audience-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--grey-1);
+    letter-spacing: 0.1em;
+  }
+  .audience-row:hover .audience-num { color: rgba(255,255,255,0.5); }
+  .audience-title {
+    font-family: var(--display);
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .audience-row:hover .audience-title em { color: var(--red); }
+  .audience-title em { font-style: italic; color: var(--blue); transition: color 0.4s; }
+  .audience-desc {
+    font-size: 15px;
+    color: var(--grey-1);
+    line-height: 1.5;
+    max-width: 480px;
+  }
+  .audience-row:hover .audience-desc { color: rgba(255,255,255,0.7); }
+  .audience-arrow {
+    justify-self: end;
+    width: 48px; height: 48px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    transition: opacity 0.3s, transform 0.4s;
+  }
+  .audience-row:hover .audience-arrow {
+    opacity: 1;
+    transform: rotate(-45deg);
+  }
+
+  /* ============ PROJECT SHOWCASE ============ */
+  .projects {
+    padding: 160px 48px;
+    background: var(--cream);
+  }
+  .projects-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 80px;
+    gap: 60px;
+  }
+  .projects-header h2 {
+    font-family: var(--display);
+    font-size: clamp(48px, 6vw, 96px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .projects-header h2 em {
+    font-style: italic;
+    color: var(--red);
+  }
+  .projects-header p {
+    max-width: 380px;
+    color: var(--grey-1);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .project-card {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: none;
+  }
+  .project-card-image {
+    aspect-ratio: 4/5;
+    background: var(--blue);
+    overflow: hidden;
+    position: relative;
+  }
+  .project-card-image svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 1s cubic-bezier(.2,.8,.2,1);
+  }
+  .project-card:hover .project-card-image svg {
+    transform: scale(1.08);
+  }
+  .project-card-meta {
+    padding: 20px 4px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .project-card-title {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .project-card-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey-1);
+    white-space: nowrap;
+  }
+
+  .project-card.col-7 { grid-column: span 7; }
+  .project-card.col-5 { grid-column: span 5; }
+  .project-card.col-5 .project-card-image { aspect-ratio: 5/6; }
+  .project-card.col-5.tall .project-card-image { background: var(--ink); }
+  .project-card.col-7 .project-card-image { aspect-ratio: 7/5; }
+  .project-card.col-6 { grid-column: span 6; }
+  .project-card.col-6 .project-card-image { aspect-ratio: 6/5; }
+
+  /* ============ CTA SECTION ============ */
+  .cta {
+    background: var(--ink);
+    color: white;
+    padding: 200px 48px 160px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg-text {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    right: 0;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 200;
+    font-size: clamp(180px, 26vw, 400px);
+    line-height: 0.8;
+    text-align: center;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.08);
+    letter-spacing: -0.04em;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .cta h2 {
+    font-family: var(--display);
+    font-size: clamp(56px, 8vw, 128px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 32px 0 48px;
+  }
+  .cta h2 em {
+    font-style: italic;
+    color: var(--red);
+    font-weight: 400;
+  }
+  .cta h2 .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px white;
+    font-style: italic;
+  }
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--red);
+    color: white;
+    text-decoration: none;
+    padding: 24px 48px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .cta-button:hover {
+    transform: translateY(-2px);
+  }
+  .cta-meta {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 80px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+  .cta-meta a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 2px;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--ink);
+    color: white;
+    padding: 80px 48px 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+  }
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 8px; }
+  .footer-col a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--red); }
+  .footer-brand h3 {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .footer-brand h3 em {
+    font-style: italic;
+    color: var(--red);
+  }
+  .footer-brand p {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 60px auto 0;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  /* magnetic hover area for CTAs */
+  [data-cursor="cta"] { cursor: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px; }
+    .hero-meta { left: 24px; right: 48px; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .intro, .services, .audiences, .projects, .cta { padding-left: 24px; padding-right: 24px; }
+    .intro-inner { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; align-items: flex-start; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.col-7, .project-card.col-5, .project-card.col-6 { grid-column: span 1; }
+    .audience-row { grid-template-columns: 40px 1fr 40px; }
+    .audience-desc { grid-column: 2; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; }
+    body { cursor: auto; }
+    .cursor-dot, .cursor-ring { display: none; }
+    .side-bars { width: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Brand side bars -->
+<div class="side-bars">
+  <div class="bar-red"></div>
+  <div class="bar-blue"></div>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <a href="#" class="logo" data-cursor="hover">
+    <span class="logo-bars"><span></span><span></span></span>
+    ProPlus
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" data-cursor="hover">Work</a></li>
+    <li><a href="#" data-cursor="hover">Services</a></li>
+    <li><a href="#" data-cursor="hover">For Builders</a></li>
+    <li><a href="#" data-cursor="hover">About</a></li>
+    <li><a href="#" data-cursor="hover">Journal</a></li>
+  </ul>
+  <a href="#" class="nav-cta" data-cursor="hover">Request Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">EST. 2015 · TORONTO · LICENSED &amp; INSURED</div>
+    <h1 class="hero-title">
+      <span class="line"><span>The plumbers</span></span>
+      <span class="line"><span>Toronto's <em>builders</em></span></span>
+      <span class="line"><span><span class="outline">trust.</span></span></span>
+    </h1>
+  </div>
+  <div class="hero-meta">
+    <p class="hero-tagline">Custom-home plumbing, radiant floor heating, and snow-melting systems engineered for Toronto's most discerning residences.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">10+</div>
+        <div class="label">Years in business</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">150+</div>
+        <div class="label">Homes plumbed</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">100%</div>
+        <div class="label">Insured &amp; bonded</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">↓ Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Custom Homes <span class="dot"></span> Radiant Floor Heating <span class="dot"></span> Snow Melting <span class="dot"></span> Subdivision Developments <span class="dot"></span> Major Renovations <span class="dot"></span> Hot Water Systems <span class="dot"></span></span>
+    <span>Custom Homes <span class="dot"></span> Radiant Floor Heating <span class="dot"></span> Snow Melting <span class="dot"></span> Subdivision Developments <span class="dot"></span> Major Renovations <span class="dot"></span> Hot Water Systems <span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro" data-reveal>
+  <div class="intro-inner">
+    <div class="section-label">01 / About</div>
+    <h2 class="intro-text">
+      <span class="reveal-line"><span>A family-owned Toronto practice</span></span>
+      <span class="reveal-line"><span>specialising in <em>precision plumbing</em></span></span>
+      <span class="reveal-line"><span>for custom homes, luxury</span></span>
+      <span class="reveal-line"><span>renovations, and the builders</span></span>
+      <span class="reveal-line"><span>who demand nothing less.</span></span>
+    </h2>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label" style="margin-bottom: 16px;">02 / Services</div>
+      <h2 class="services-title">What we <em>do</em>.</h2>
+    </div>
+    <p style="max-width: 380px; color: var(--grey-1); font-size: 15px; line-height: 1.6;">Three core practices, deeply specialised. From rough-in to final commissioning, every system is custom-engineered for the property and the people in it.</p>
+  </div>
+  <div class="services-grid">
+    <a href="#" class="service-card" data-cursor="hover">
+      <div>
+        <div class="service-card-num">01 / Custom Home Plumbing</div>
+      </div>
+      <div class="service-card-visual">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#F4F2EC"/>
+          <path d="M40 160 L40 80 L70 80 L70 60 L130 60 L130 80 L160 80 L160 160" stroke="#0F1B45" stroke-width="2" fill="none"/>
+          <path d="M55 160 L55 100 L145 100 L145 160" stroke="#0F1B45" stroke-width="1" fill="none"/>
+          <rect x="85" y="120" width="30" height="40" fill="#EC1C24"/>
+          <circle cx="100" cy="85" r="4" fill="#243D97"/>
+          <path d="M100 89 L100 120" stroke="#243D97" stroke-width="2"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="service-card-title">Custom Home <em>Plumbing</em></h3>
+        <p class="service-card-desc">Complete system design and installation for new builds and major renovations. Underground, rough-in, and finishing.</p>
+        <div class="service-card-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="service-card" data-cursor="hover">
+      <div>
+        <div class="service-card-num">02 / Radiant Floor Heating</div>
+      </div>
+      <div class="service-card-visual">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#F4F2EC"/>
+          <path d="M30 60 Q60 60 60 90 Q60 120 90 120 Q120 120 120 90 Q120 60 150 60 Q170 60 170 90" stroke="#EC1C24" stroke-width="2" fill="none"/>
+          <path d="M30 100 Q60 100 60 130 Q60 160 90 160 Q120 160 120 130 Q120 100 150 100 Q170 100 170 130" stroke="#EC1C24" stroke-width="2" fill="none" opacity="0.6"/>
+          <path d="M30 140 Q60 140 60 170 Q60 190 90 190" stroke="#EC1C24" stroke-width="2" fill="none" opacity="0.3"/>
+          <line x1="20" y1="30" x2="180" y2="30" stroke="#0F1B45" stroke-width="3"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="service-card-title">Radiant Floor <em>Heating</em></h3>
+        <p class="service-card-desc">Cost-effective, environmentally conscious in-floor heating with zoned controls for every room.</p>
+        <div class="service-card-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="service-card" data-cursor="hover">
+      <div>
+        <div class="service-card-num">03 / Snow Melting Systems</div>
+      </div>
+      <div class="service-card-visual">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="200" fill="#F4F2EC"/>
+          <rect x="20" y="120" width="160" height="50" fill="#0F1B45" opacity="0.1"/>
+          <line x1="20" y1="120" x2="180" y2="120" stroke="#0F1B45" stroke-width="1"/>
+          <path d="M30 145 Q40 130 50 145 Q60 160 70 145 Q80 130 90 145 Q100 160 110 145 Q120 130 130 145 Q140 160 150 145 Q160 130 170 145" stroke="#EC1C24" stroke-width="2" fill="none"/>
+          <g fill="#243D97">
+            <circle cx="40" cy="60" r="3"/>
+            <circle cx="80" cy="40" r="3"/>
+            <circle cx="120" cy="70" r="3"/>
+            <circle cx="160" cy="50" r="3"/>
+            <circle cx="60" cy="90" r="3"/>
+            <circle cx="100" cy="80" r="3"/>
+            <circle cx="140" cy="100" r="3"/>
+          </g>
+          <text x="50" y="55" font-size="10" fill="#243D97">*</text>
+          <text x="90" y="35" font-size="14" fill="#243D97">*</text>
+          <text x="130" y="65" font-size="12" fill="#243D97">*</text>
+          <text x="170" y="45" font-size="10" fill="#243D97">*</text>
+        </svg>
+      </div>
+      <div>
+        <h3 class="service-card-title">Snow Melting <em>Systems</em></h3>
+        <p class="service-card-desc">High-performance, automated snow and ice melting for driveways, walkways, and entrances.</p>
+        <div class="service-card-arrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- PROCESS - horizontal scroll -->
+<section class="process">
+  <div class="process-sticky">
+    <div class="process-pin">
+      <div class="process-track" id="processTrack">
+        <div class="process-intro">
+          <div class="section-label" style="color: rgba(255,255,255,0.5);">03 / How we work</div>
+          <h2>The <em>process</em>.</h2>
+          <p>Four phases, designed around the realities of Toronto custom construction. Clear communication, dependable scheduling, code-compliant work at every checkpoint.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">01</div>
+          <div class="process-step-body">
+            <div class="process-step-tag" style="margin-bottom: 16px;">PHASE ONE</div>
+            <h3>Consultation</h3>
+            <p>We meet on-site or at the table with you, your builder, and architect. Scope, budget, deadlines — assessed and documented before a single fitting is ordered.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">02</div>
+          <div class="process-step-body">
+            <div class="process-step-tag" style="margin-bottom: 16px;">PHASE TWO</div>
+            <h3>Design &amp; Spec</h3>
+            <p>Full plumbing system design with material specification. Tight coordination with HVAC, electrical, and framing trades. Built to the latest Ontario Building Code.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">03</div>
+          <div class="process-step-body">
+            <div class="process-step-tag" style="margin-bottom: 16px;">PHASE THREE</div>
+            <h3>Installation</h3>
+            <p>Underground, rough-in, and finishing in disciplined sequence. Daily site cleanliness, weekly progress reporting, zero surprises.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-num">04</div>
+          <div class="process-step-body">
+            <div class="process-step-tag" style="margin-bottom: 16px;">PHASE FOUR</div>
+            <h3>Inspection &amp; Handover</h3>
+            <p>Pressure testing, code inspection, walk-through with the homeowner. Full warranty documentation and 24-month service guarantee.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCES -->
+<section class="audiences">
+  <div class="audiences-inner">
+    <div class="audiences-header">
+      <div class="section-label">04 / Who we work with</div>
+      <h2>We work with clients who expect <em>reliability</em> and quality without compromise.</h2>
+    </div>
+    <div class="audiences-list">
+      <a href="#" class="audience-row" data-cursor="hover">
+        <div class="audience-num">/ 01</div>
+        <h3 class="audience-title">Custom home <em>builders</em></h3>
+        <p class="audience-desc">Trusted by Toronto's leading custom-home and design-build firms for tight scheduling, code-perfect work, and seamless trade coordination.</p>
+        <div class="audience-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0l-3.5-3.5M12 7l-3.5 3.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        </div>
+      </a>
+      <a href="#" class="audience-row" data-cursor="hover">
+        <div class="audience-num">/ 02</div>
+        <h3 class="audience-title">Architectural <em>firms</em></h3>
+        <p class="audience-desc">We collaborate from the schematic phase to ensure your design intent makes it through to the finished plumbing — without value-engineering away what matters.</p>
+        <div class="audience-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0l-3.5-3.5M12 7l-3.5 3.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        </div>
+      </a>
+      <a href="#" class="audience-row" data-cursor="hover">
+        <div class="audience-num">/ 03</div>
+        <h3 class="audience-title">Luxury <em>homeowners</em></h3>
+        <p class="audience-desc">Building a custom home or renovating an existing one. We work directly with you or alongside your project manager — your call.</p>
+        <div class="audience-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0l-3.5-3.5M12 7l-3.5 3.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        </div>
+      </a>
+      <a href="#" class="audience-row" data-cursor="hover">
+        <div class="audience-num">/ 04</div>
+        <h3 class="audience-title">Subdivision <em>developers</em></h3>
+        <p class="audience-desc">We scale operations for multi-home developments, expanding crew and resources to deliver consistent quality across every unit, on every timeline.</p>
+        <div class="audience-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0l-3.5-3.5M12 7l-3.5 3.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        </div>
+      </a>
+      <a href="#" class="audience-row" data-cursor="hover">
+        <div class="audience-num">/ 05</div>
+        <h3 class="audience-title">Property <em>managers</em></h3>
+        <p class="audience-desc">Ongoing maintenance, system upgrades, and emergency support for commercial and luxury residential portfolios.</p>
+        <div class="audience-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0l-3.5-3.5M12 7l-3.5 3.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects">
+  <div class="projects-inner">
+    <div class="projects-header">
+      <div>
+        <div class="section-label" style="margin-bottom: 16px;">05 / Selected work</div>
+        <h2>Recent <em>projects</em>.</h2>
+      </div>
+      <p>A small selection of recent custom homes, renovations, and radiant heating projects across the Greater Toronto Area.</p>
+    </div>
+    <div class="projects-grid">
+      <a href="#" class="project-card col-7" data-cursor="hover">
+        <div class="project-card-image">
+          <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#243D97"/>
+                <stop offset="1" stop-color="#0F1B45"/>
+              </linearGradient>
+            </defs>
+            <rect width="700" height="500" fill="url(#g1)"/>
+            <g opacity="0.15" stroke="white" stroke-width="1" fill="none">
+              <rect x="100" y="80" width="500" height="340"/>
+              <line x1="100" y1="200" x2="600" y2="200"/>
+              <line x1="100" y1="320" x2="600" y2="320"/>
+              <line x1="250" y1="80" x2="250" y2="420"/>
+              <line x1="450" y1="80" x2="450" y2="420"/>
+            </g>
+            <circle cx="350" cy="250" r="120" fill="#EC1C24" opacity="0.8"/>
+            <circle cx="350" cy="250" r="80" fill="none" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="project-card-meta">
+          <h3 class="project-card-title">Forest Hill Residence</h3>
+          <span class="project-card-tag">Custom Home · 2025</span>
+        </div>
+      </a>
+      <a href="#" class="project-card col-5" data-cursor="hover">
+        <div class="project-card-image" style="background: #F4F2EC;">
+          <svg viewBox="0 0 500 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="500" height="600" fill="#F4F2EC"/>
+            <g stroke="#0F1B45" stroke-width="1.5" fill="none" opacity="0.7">
+              <path d="M50 100 Q150 100 150 200 Q150 300 250 300 Q350 300 350 400 Q350 500 450 500"/>
+              <path d="M50 200 Q150 200 150 300 Q150 400 250 400 Q350 400 350 500"/>
+              <path d="M50 300 Q150 300 150 400 Q150 500 250 500"/>
+            </g>
+            <rect x="350" y="100" width="100" height="100" fill="#EC1C24"/>
+            <rect x="50" y="450" width="80" height="80" fill="#243D97"/>
+          </svg>
+        </div>
+        <div class="project-card-meta">
+          <h3 class="project-card-title">Rosedale Heated Floors</h3>
+          <span class="project-card-tag">Radiant Heating · 2025</span>
+        </div>
+      </a>
+      <a href="#" class="project-card col-6" data-cursor="hover">
+        <div class="project-card-image" style="background: #0F1B45;">
+          <svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="600" height="500" fill="#0F1B45"/>
+            <g opacity="0.2" stroke="white" stroke-width="1">
+              <line x1="0" y1="100" x2="600" y2="100"/>
+              <line x1="0" y1="200" x2="600" y2="200"/>
+              <line x1="0" y1="300" x2="600" y2="300"/>
+              <line x1="0" y1="400" x2="600" y2="400"/>
+            </g>
+            <path d="M50 350 Q100 200 200 250 T400 280 T550 200" stroke="white" stroke-width="3" fill="none"/>
+            <circle cx="50" cy="350" r="8" fill="#EC1C24"/>
+            <circle cx="550" cy="200" r="8" fill="#EC1C24"/>
+          </svg>
+        </div>
+        <div class="project-card-meta">
+          <h3 class="project-card-title">Yorkville Townhomes</h3>
+          <span class="project-card-tag">Subdivision · 12 units · 2024</span>
+        </div>
+      </a>
+      <a href="#" class="project-card col-6" data-cursor="hover">
+        <div class="project-card-image" style="background: #EC1C24;">
+          <svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="600" height="500" fill="#EC1C24"/>
+            <g stroke="white" stroke-width="2" fill="none" opacity="0.6">
+              <circle cx="300" cy="250" r="180"/>
+              <circle cx="300" cy="250" r="120"/>
+              <circle cx="300" cy="250" r="60"/>
+            </g>
+            <rect x="280" y="80" width="40" height="340" fill="white" opacity="0.3"/>
+            <rect x="130" y="230" width="340" height="40" fill="white" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="project-card-meta">
+          <h3 class="project-card-title">Lawrence Park Driveway</h3>
+          <span class="project-card-tag">Snow Melting · 2024</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-bg-text">Let's build.</div>
+  <div class="cta-inner">
+    <div class="section-label" style="color: rgba(255,255,255,0.5); justify-content: center;">06 / Get in touch</div>
+    <h2>Build it <em>right</em><br><span class="outline">from the start.</span></h2>
+    <a href="#" class="cta-button" data-cursor="cta">
+      Request a Consultation
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+    </a>
+    <div class="cta-meta">
+      <span>📞 <a href="tel:+16475187787">(647) 518-7787</a></span>
+      <span>✉ <a href="mailto:info@proplusplumbing.com">info@proplusplumbing.com</a></span>
+      <span>📍 Toronto, ON</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>ProPlus <em>Plumbing</em> Inc.</h3>
+      <p>Custom-home plumbing, radiant floor heating, and snow-melting systems for Toronto's most discerning residences. Family-owned since 2015.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#" data-cursor="hover">Custom Home Plumbing</a></li>
+        <li><a href="#" data-cursor="hover">Radiant Floor Heating</a></li>
+        <li><a href="#" data-cursor="hover">Snow Melting</a></li>
+        <li><a href="#" data-cursor="hover">Subdivisions</a></li>
+        <li><a href="#" data-cursor="hover">Renovations</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#" data-cursor="hover">About</a></li>
+        <li><a href="#" data-cursor="hover">Projects</a></li>
+        <li><a href="#" data-cursor="hover">For Builders</a></li>
+        <li><a href="#" data-cursor="hover">Journal</a></li>
+        <li><a href="#" data-cursor="hover">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+16475187787" data-cursor="hover">(647) 518-7787</a></li>
+        <li><a href="mailto:info@proplusplumbing.com" data-cursor="hover">info@proplusplumbing.com</a></li>
+        <li><a href="#" data-cursor="hover">Toronto, Ontario</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ProPlus Plumbing Inc. All rights reserved.</span>
+    <span>Licensed · Bonded · Insured</span>
+    <span>Site by OOBE</span>
+  </div>
+</footer>
+
+<script>
+  // ===== CUSTOM CURSOR =====
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorRing = document.querySelector('.cursor-ring');
+  let mouseX = 0, mouseY = 0;
+  let dotX = 0, dotY = 0;
+  let ringX = 0, ringY = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    dotX += (mouseX - dotX) * 0.5;
+    dotY += (mouseY - dotY) * 0.5;
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Cursor hover states
+  document.querySelectorAll('[data-cursor="hover"]').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+  });
+  document.querySelectorAll('[data-cursor="cta"]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursorRing.classList.add('cta');
+      cursorDot.classList.add('cta');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursorRing.classList.remove('cta');
+      cursorDot.classList.remove('cta');
+    });
+  });
+
+  // ===== INTERSECTION OBSERVER for reveals =====
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.2 });
+  reveals.forEach(el => io.observe(el));
+
+  // ===== HORIZONTAL SCROLL for process =====
+  const processSection = document.querySelector('.process-sticky');
+  const processTrack = document.getElementById('processTrack');
+
+  function updateHorizontalScroll() {
+    if (!processSection || !processTrack) return;
+    const rect = processSection.getBoundingClientRect();
+    const sectionTop = rect.top;
+    const sectionHeight = processSection.offsetHeight - window.innerHeight;
+    const scrollProgress = Math.max(0, Math.min(1, -sectionTop / sectionHeight));
+    const trackWidth = processTrack.scrollWidth;
+    const maxTranslate = trackWidth - window.innerWidth + 96; // padding
+    processTrack.style.transform = `translateX(${-scrollProgress * maxTranslate}px)`;
+  }
+
+  window.addEventListener('scroll', updateHorizontalScroll, { passive: true });
+  window.addEventListener('resize', updateHorizontalScroll);
+  updateHorizontalScroll();
+
+  // ===== PARALLAX HERO =====
+  const heroGrid = document.querySelector('.hero-grid');
+  const heroBg = document.querySelector('.hero-bg');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY < window.innerHeight) {
+      heroGrid.style.transform = `translateY(${scrollY * 0.3}px)`;
+      heroBg.style.transform = `translateY(${scrollY * 0.15}px)`;
+    }
+  }, { passive: true });
+
+  // ===== MAGNETIC CTA BUTTON =====
+  const ctaButton = document.querySelector('.cta-button');
+  if (ctaButton) {
+    ctaButton.addEventListener('mousemove', (e) => {
+      const rect = ctaButton.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      ctaButton.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+    ctaButton.addEventListener('mouseleave', () => {
+      ctaButton.style.transform = '';
+    });
+  }
+</script>
+</body>
+</html>
