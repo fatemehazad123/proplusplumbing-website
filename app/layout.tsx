@@ -7,6 +7,7 @@ import { CustomCursor } from '@/components/chrome/CustomCursor';
 import { Nav } from '@/components/chrome/Nav';
 import { ScrollProgress } from '@/components/chrome/ScrollProgress';
 import { SideBars } from '@/components/chrome/SideBars';
+import { Footer } from '@/components/sections/Footer';
 import { JsonLd } from '@/components/shared/JsonLd';
 import { localBusinessSchema } from '@/lib/seo';
 import { SITE } from '@/lib/site';
@@ -84,6 +85,7 @@ export default function RootLayout({
         <SideBars />
         <Nav />
         {children}
+        <Footer />
         <BackToTop />
 
         {gaMeasurementId && (

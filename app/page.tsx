@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Audiences } from '@/components/sections/Audiences';
 import { CTA } from '@/components/sections/CTA';
-import { Footer } from '@/components/sections/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { Intro } from '@/components/sections/Intro';
 import { Marquee } from '@/components/sections/Marquee';
@@ -59,7 +58,6 @@ export default function Home() {
         <Projects />
         <CTA />
       </main>
-      <Footer />
     </>
   );
 }
