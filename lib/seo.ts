@@ -42,7 +42,8 @@ export const localBusinessSchema = {
   priceRange: '$$$$',
   foundingDate: SITE.foundingDate,
   founder: { '@type': 'Person', name: 'ProPlus Plumbing' },
-  // TODO: populate with real social URLs once ProPlus shares them.
+  // Populated from SITE.social — currently LinkedIn only.
+  // TODO: extend with Instagram, Google Business Profile, Houzz, Facebook as available.
   sameAs: SITE.social,
 };
 

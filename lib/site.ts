@@ -35,9 +35,11 @@ export const SITE = {
     'Markham',
     'Richmond Hill',
   ] as const,
-  // TODO: populate with real social URLs once ProPlus shares them
-  // (LinkedIn, Instagram, Google Business Profile, Houzz, etc.).
-  social: [] as string[],
+  // TODO: add more social URLs as they become available
+  // (Instagram, Google Business Profile, Houzz, Facebook, etc.).
+  social: [
+    'https://www.linkedin.com/company/pro-plus-plumbing-inc.',
+  ] as string[],
 } as const;
 
 export function absoluteUrl(path: string): string {

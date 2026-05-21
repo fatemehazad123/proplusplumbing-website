@@ -1,31 +1,41 @@
+import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { NewsletterForm } from '@/components/shared/NewsletterForm';
+import { LinkedIn } from '@/components/primitives/icons';
 
 const MAPS_URL =
   'https://www.google.com/maps/search/?api=1&query=181+Maxwell+St+North+York+ON+M3H+5B5';
+
+const LINKEDIN_URL = 'https://www.linkedin.com/company/pro-plus-plumbing-inc.';
 
 type LinkItem = {
   href: string;
   label?: string;
   lines?: string[];
   external?: boolean;
+  icon?: ReactNode;
 };
 
+// Subdivisions and Renovations re-point to /services/custom-home — both are
+// covered under custom-home work (subdivision developments are mentioned in
+// that page's intro copy) and don't have dedicated pages yet.
 const SERVICES: LinkItem[] = [
   { href: '/services/custom-home', label: 'Custom Home Plumbing' },
   { href: '/services/floor-heating', label: 'Radiant Floor Heating' },
   { href: '/services/snow-melting', label: 'Snow Melting' },
-  { href: '/services/subdivisions', label: 'Subdivisions' },
-  { href: '/services/renovations', label: 'Renovations' },
+  { href: '/services/custom-home', label: 'Subdivisions' },
+  { href: '/services/custom-home', label: 'Renovations' },
 ];
 
 const COMPANY: LinkItem[] = [
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
   { href: '/for-builders', label: 'For Builders' },
-  { href: '/resources', label: 'Journal' },
-  { href: '/about/team', label: 'Careers' },
+  { href: '/journal', label: 'Journal' },
+  // ProPlus posts jobs on LinkedIn — "Careers" routes there until a dedicated
+  // careers page ships.
+  { href: LINKEDIN_URL, label: 'Careers', external: true },
 ];
 
 const CONTACT: LinkItem[] = [
@@ -35,6 +45,12 @@ const CONTACT: LinkItem[] = [
     href: MAPS_URL,
     lines: ['181 Maxwell St', 'North York, ON M3H 5B5'],
     external: true,
+  },
+  {
+    href: LINKEDIN_URL,
+    label: 'LinkedIn',
+    external: true,
+    icon: <LinkedIn size={15} />,
   },
 ];
 
@@ -47,6 +63,14 @@ function ItemContent({ item }: { item: LinkItem }) {
             {line}
           </span>
         ))}
+      </span>
+    );
+  }
+  if (item.icon) {
+    return (
+      <span className="inline-flex items-center gap-2">
+        {item.icon}
+        {item.label}
       </span>
     );
   }
