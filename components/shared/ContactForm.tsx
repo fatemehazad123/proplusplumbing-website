@@ -67,7 +67,7 @@ function validate(fields: Fields): FieldErrors {
 }
 
 const inputBase =
-  'w-full rounded-sm border border-line bg-white px-4 py-3 text-[15px] text-ink transition-colors duration-200 placeholder:text-grey-1 hover:border-grey-1 focus:border-navy focus:outline-none focus-visible:[outline-color:#0F1B45]';
+  'w-full rounded-sm border border-line bg-white px-4 py-3 text-[16px] text-ink transition-colors duration-200 placeholder:text-grey-1 hover:border-grey-1 focus:border-navy focus:outline-none focus-visible:[outline-color:#0F1B45] md:text-[15px]';
 
 const labelBase =
   'block font-mono text-[11px] uppercase tracking-[0.15em] text-grey-1 mb-2';

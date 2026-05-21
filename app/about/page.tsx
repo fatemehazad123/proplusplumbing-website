@@ -63,10 +63,10 @@ export default function AboutPage() {
       />
 
       <section className="bg-cream px-6 py-20 md:px-12 md:py-24">
-        <dl className="mx-auto grid max-w-[1400px] grid-cols-2 gap-10 md:grid-cols-4 md:gap-12">
+        <dl className="mx-auto grid max-w-[1400px] grid-cols-2 gap-8 sm:gap-10 md:grid-cols-4 md:gap-12">
           {STATS.map((stat) => (
             <div key={stat.label}>
-              <dd className="inline-block border-b-2 border-navy pb-2 font-display text-[clamp(40px,5vw,64px)] font-light italic leading-none tracking-[-0.03em] text-navy">
+              <dd className="inline-block border-b-2 border-navy pb-2 font-display text-[clamp(28px,5vw,64px)] font-light italic leading-none tracking-[-0.03em] text-navy">
                 {stat.num}
               </dd>
               <dt className="mt-3 text-[11px] uppercase tracking-[0.15em] text-grey-1">

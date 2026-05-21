@@ -124,19 +124,19 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1.5, ease: lineEase }}
-        className="absolute bottom-12 left-6 right-16 z-10 flex flex-col items-start gap-6 md:left-12 md:right-20 md:flex-row md:items-end md:justify-between"
+        className="absolute bottom-10 left-6 right-10 z-10 flex flex-col items-start gap-6 md:bottom-12 md:left-12 md:right-20 md:flex-row md:items-end md:justify-between"
       >
         <p className="max-w-[380px] text-[15px] leading-[1.6] text-white/70">
           Custom-home plumbing, radiant floor heating, and snow-melting systems
           engineered for Toronto&rsquo;s most discerning residences.
         </p>
-        <dl className="flex gap-12">
+        <dl className="flex gap-6 sm:gap-10 md:gap-12">
           {HERO_STATS.map((stat) => (
             <div key={stat.label}>
-              <dd className="font-display text-[48px] font-light italic leading-none tracking-[-0.03em] text-white">
+              <dd className="font-display text-[32px] font-light italic leading-none tracking-[-0.03em] text-white sm:text-[40px] md:text-[48px]">
                 {stat.num}
               </dd>
-              <dt className="mt-2 text-[11px] uppercase tracking-[0.15em] text-white/50">
+              <dt className="mt-2 text-[10px] uppercase tracking-[0.15em] text-white/50 sm:text-[11px]">
                 {stat.label}
               </dt>
             </div>

@@ -97,7 +97,7 @@ function Column({
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-navy px-6 pb-10 pt-20 text-white md:px-12">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] md:gap-12">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] md:gap-12">
         <div className="col-span-2 md:col-span-1">
           <Image
             src="/logo-white.svg"

@@ -36,12 +36,10 @@ const INTRO_COPY =
 
 function PhaseCard({ phase }: { phase: (typeof PHASES)[number] }) {
   return (
-    <div
-      className="relative flex h-[600px] w-[480px] shrink-0 flex-col justify-between rounded-sm border border-white/10 bg-white/[0.03] p-12"
-    >
+    <div className="relative flex w-full shrink-0 flex-col justify-between gap-10 rounded-sm border border-white/10 bg-white/[0.03] p-8 md:h-[600px] md:w-[480px] md:gap-0 md:p-12">
       <div
         aria-hidden="true"
-        className="font-display text-[200px] font-extralight italic leading-[0.85] tracking-[-0.04em]"
+        className="font-display text-[140px] font-extralight italic leading-[0.85] tracking-[-0.04em] md:text-[200px]"
         style={{
           color: 'transparent',
           WebkitTextStroke: '1.5px rgba(255,255,255,0.15)',
@@ -50,10 +48,10 @@ function PhaseCard({ phase }: { phase: (typeof PHASES)[number] }) {
         {phase.num}
       </div>
       <div>
-        <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-red-brand">
+        <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-red-brand md:mb-4">
           {phase.tag}
         </div>
-        <h3 className="mb-4 font-display text-[40px] font-normal leading-none tracking-[-0.02em]">
+        <h3 className="mb-3 font-display text-[32px] font-normal leading-none tracking-[-0.02em] md:mb-4 md:text-[40px]">
           {phase.title}
         </h3>
         <p className="text-[15px] leading-[1.6] text-white/60">{phase.desc}</p>

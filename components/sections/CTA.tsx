@@ -87,7 +87,7 @@ function MagneticButton({
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{ x, y }}
-      className="inline-flex items-center gap-5 rounded-full bg-red-brand px-12 py-6 text-[14px] font-medium uppercase tracking-[0.12em] text-white"
+      className="inline-flex items-center justify-center gap-4 rounded-full bg-red-brand px-8 py-5 text-center text-[13px] font-medium uppercase tracking-[0.12em] text-white sm:gap-5 sm:px-12 sm:py-6 sm:text-[14px]"
     >
       {text}
       <ArrowRight />

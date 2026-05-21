@@ -88,14 +88,6 @@ export function Projects() {
                   className="object-cover transition-transform duration-1000 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-[1.08]"
                 />
               </div>
-              <div className="flex items-start justify-between gap-5 px-1 pt-5">
-                <h3 className="font-display text-[22px] font-normal leading-[1.1] tracking-[-0.02em] text-ink">
-                  {project.title}
-                </h3>
-                <span className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.15em] text-grey-1">
-                  {project.tag}
-                </span>
-              </div>
             </Link>
           ))}
         </div>

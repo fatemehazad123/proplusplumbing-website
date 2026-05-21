@@ -122,7 +122,7 @@ export function NewsletterForm({ variant = 'dark' }: { variant?: Variant }) {
             data-cursor="hover"
             aria-invalid={state === 'error'}
             aria-describedby={state === 'error' ? 'newsletter-error' : undefined}
-            className={`w-full rounded-sm px-3 py-2.5 text-[14px] transition-colors duration-200 focus:outline-none ${styles.input} ${
+            className={`w-full rounded-sm px-3 py-2.5 text-[16px] transition-colors duration-200 focus:outline-none md:text-[14px] ${styles.input} ${
               state === 'error' ? styles.inputError : ''
             }`}
           />
